@@ -1,4 +1,6 @@
 ---
+import { primaryCta } from '../data/site';
+
 interface Props {
   eyebrow?: string;
   title: string;
@@ -7,7 +9,7 @@ interface Props {
   ctaHref?: string;
 }
 
-const { eyebrow, title, text, ctaLabel = 'Book a free class', ctaHref = '/contact' } = Astro.props;
+const { eyebrow, title, text, ctaLabel = primaryCta.label, ctaHref = primaryCta.href } = Astro.props;
 ---
 
 <section class="section aw-section">

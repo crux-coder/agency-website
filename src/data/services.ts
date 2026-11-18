@@ -7,45 +7,69 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    title: 'Group Classes',
+    title: 'Izrada web stranica',
     description:
-      'High-energy HIIT, strength circuits, spin, and mobility sessions led by certified coaches. Every class is scalable to your level.',
-    details: ['15+ classes every week', 'All levels welcome', 'Member drop-in or class packs'],
-    format: '45–60 min · Studio floor',
+      'Moderna, brza web stranica po mjeri vaše firme — dizajnirana da posjetioce pretvori u pozive, upite i rezervacije.',
+    details: ['Prilagođeno mobitelima', 'Do 8 podstranica', 'Kontakt forma i Google mapa'],
+    format: 'Gotovo za 2–3 sedmice',
   },
   {
-    title: 'Personal Training',
+    title: 'Lokalni SEO',
     description:
-      'One-to-one programming built around your goals, your schedule, and your body. Sessions include a full movement assessment to start.',
-    details: ['Custom training plans', 'Form coaching in every session', 'Monthly progress reviews'],
-    format: '60 min · By appointment',
+      'Pojavite se kada neko u vašem gradu ukuca „frizer Sarajevo” ili „vodoinstalater Tuzla”. Optimizujemo stranicu za lokalne pretrage na Googleu.',
+    details: ['Istraživanje ključnih riječi', 'Strukturirani podaci (schema)', 'Tehnička SEO provjera'],
+    format: 'Uključeno u svaki paket',
   },
   {
-    title: 'Nutrition Coaching',
+    title: 'Google Business profil',
     description:
-      'Practical, judgement-free guidance built around real meals and real schedules. No cleanses, no rigid plans — just habits that last.',
-    details: ['Weekly check-ins', 'Meal templates, not meal police', 'Works with any dietary style'],
-    format: '6-week programme · Weekly check-ins',
+      'Postavljanje i optimizacija vašeg profila na Google mapama — radno vrijeme, fotografije, usluge i recenzije na jednom mjestu.',
+    details: ['Otvaranje i verifikacija', 'Kategorije i opis usluga', 'Savjeti za recenzije'],
+    format: 'Jednokratno postavljanje',
   },
   {
-    title: 'Recovery & Mobility',
+    title: 'Web shop',
     description:
-      'Guided stretching, foam rolling, and breathwork sessions for busy nervous systems. Short practices you can use anywhere.',
-    details: ['Drop-in friendly', 'No previous experience needed', 'Includes take-home routines'],
-    format: '30 min · Drop-in sessions',
+      'Online prodaja za lokalne trgovine i proizvođače: katalog proizvoda, narudžbe, plaćanje pouzećem ili karticom i dostava širom BiH.',
+    details: ['Jednostavno upravljanje proizvodima', 'Plaćanje pouzećem i karticom', 'Obavijesti o narudžbama'],
+    format: 'Gotovo za 4–6 sedmica',
   },
   {
-    title: 'Open Gym Access',
+    title: 'Redizajn postojeće stranice',
     description:
-      'Full access to squat racks, free weights, and conditioning zones. Coaching support is always on the floor when you need a spot.',
-    details: ['7 days a week', 'Early and late hours', 'Barbell, dumbbell, and bodyweight zones'],
-    format: 'Membership · 05:30–23:00',
+      'Imate staru, sporu stranicu koja ne radi na mobitelu? Prenosimo sadržaj na novi, brz dizajn bez gubitka pozicija na Googleu.',
+    details: ['Analiza postojeće stranice', 'Preusmjeravanja (301) bez gubitka SEO', 'Novi, brži dizajn'],
+    format: 'Gotovo za 2–4 sedmice',
   },
   {
-    title: 'Online Coaching',
+    title: 'Održavanje i hosting',
     description:
-      'Train anywhere with remote programming, video form checks, and a coach on chat. Same standards as the studio, minus the commute.',
-    details: ['Syncs with your own equipment', 'Weekly video feedback', 'Flexible pause when life happens'],
-    format: 'Monthly · App-based',
+      'Brinemo o hostingu, sigurnosnim kopijama, ažuriranjima i sitnim izmjenama teksta i slika, da se vi možete baviti svojim poslom.',
+    details: ['Hosting i SSL certifikat', 'Izmjene sadržaja po potrebi', 'Mjesečni izvještaj posjeta'],
+    format: 'Mjesečna pretplata',
+  },
+];
+
+export interface ProcessStep {
+  title: string;
+  description: string;
+}
+
+export const processSteps: ProcessStep[] = [
+  {
+    title: 'Besplatan razgovor',
+    description: 'Upoznamo vaš posao, klijente i konkurenciju u vašem gradu. Dobijete jasnu ponudu bez obaveze.',
+  },
+  {
+    title: 'Dizajn i sadržaj',
+    description: 'Pripremimo dizajn i tekstove optimizovane za pretrage koje vaši klijenti zaista kucaju.',
+  },
+  {
+    title: 'Izrada i testiranje',
+    description: 'Stranica se gradi, testira na mobitelima i ubrzava. Vi pregledate i tražite izmjene.',
+  },
+  {
+    title: 'Objava i Google',
+    description: 'Objavimo stranicu, prijavimo je Googleu i povežemo s vašim Google Business profilom.',
   },
 ];

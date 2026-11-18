@@ -1,0 +1,134 @@
+---
+import CtaBand from '../../components/CtaBand.astro';
+import PageHero from '../../components/PageHero.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { cities, type City } from '../../data/cities';
+import { plans } from '../../data/pricing';
+import { services } from '../../data/services';
+import { primaryCta, site } from '../../data/site';
+import { breadcrumbSchema, businessRef } from '../../utils/schema';
+
+interface Props {
+  city: City;
+}
+
+export function getStaticPaths() {
+  return cities.map((city) => ({ params: { grad: city.slug }, props: { city } }));
+}
+
+const { city } = Astro.props;
+const path = `/izrada-web-stranica/${city.slug}/`;
+const otherCities = cities.filter((c) => c.slug !== city.slug);
+const startPrice = plans[0]?.price;
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `Izrada web stranica ${city.name}`,
+    serviceType: 'Izrada web stranica',
+    provider: businessRef,
+    areaServed: {
+      '@type': 'City',
+      name: city.name,
+      containedInPlace: { '@type': 'Country', name: 'Bosna i Hercegovina' },
+    },
+  },
+  breadcrumbSchema([
+    ['Usluge', '/usluge'],
+    [`Izrada web stranica ${city.name}`, path],
+  ]),
+];
+---
+
+<BaseLayout
+  title={`Izrada web stranica ${city.name}`}
+  description={`Izrada web stranica u ${city.locative} za lokalne firme: brze, moderne i optimizovane za Google pretrage u gradu ${city.name}. Stranica-vizitka od ${startPrice} KM.`}
+  schema={schema}
+>
+  <PageHero
+    eyebrow={`${city.name} · ${city.region}`}
+    title={`Izrada web stranica ${city.name}`}
+    subtitle={`Web stranice za firme u ${city.locative} koje žele više poziva i upita od lokalnih klijenata — uz lokalni SEO i Google Business profil.`}
+    compact
+  >
+    <div class="buttons is-centered mt-5">
+      <a class="button is-primary is-medium" href={primaryCta.href}>Besplatna ponuda</a>
+      <a class="button is-medium is-outlined aw-btn-ghost" href="/usluge">Cijene paketa</a>
+    </div>
+  </PageHero>
+
+  <section class="section aw-section">
+    <div class="container">
+      <div class="columns is-vcentered">
+        <div class="column is-7">
+          <h2 class="title is-2 mb-4">Kako vas klijenti u {city.locative} pronalaze</h2>
+          <div class="content">
+            <p>{city.intro}</p>
+            <p>
+              Svaka stranica koju pravimo je prilagođena mobitelima, brzo se
+              učitava i ima strukturirane podatke koje Google koristi za lokalne
+              rezultate. Uz to sredimo i vaš Google Business profil, kako biste
+              se pojavili na mapi kada neko traži vašu uslugu u gradu {city.name}.
+            </p>
+          </div>
+        </div>
+        <div class="column is-5">
+          <div class="box aw-hero-box">
+            <p class="aw-eyebrow mb-3">Najčešće radimo za</p>
+            <ul class="content">
+              {city.industries.map((industry) => <li>{industry}</li>)}
+            </ul>
+            <p class="aw-form-note mt-4">
+              Sastanak uživo ili online — kako vama odgovara.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section aw-section aw-section-alt">
+    <div class="container">
+      <div class="aw-section-head">
+        <p class="aw-eyebrow mb-2">Usluge</p>
+        <h2 class="title is-2">Šta radimo za firme u {city.locative}</h2>
+      </div>
+
+      <div class="columns is-multiline">
+        {
+          services.slice(0, 3).map((service) => (
+            <div class="column is-4">
+              <ServiceCard {...service} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section aw-section">
+    <div class="container">
+      <div class="aw-section-head">
+        <p class="aw-eyebrow mb-2">Ostali gradovi</p>
+        <h2 class="title is-4">Radimo i u drugim gradovima BiH</h2>
+      </div>
+      <div class="aw-city-links">
+        {
+          otherCities.map((other) => (
+            <a class="button is-outlined aw-btn-ghost" href={`/izrada-web-stranica/${other.slug}/`}>
+              {other.name}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow={`${site.name} · ${city.name}`}
+    title={`Trebate web stranicu u ${city.locative}?`}
+    text="Javite se za besplatnu ponudu u KM. Odgovor u roku od jednog radnog dana."
+  />
+</BaseLayout>

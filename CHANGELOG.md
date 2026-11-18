@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- Site reworked from gym template into a Bosnian-language web agency site for
+  local businesses: new copy, services, KM pricing, FAQ, process, blog posts,
+  code-bracket logo, favicon and OG image.
+- Routes renamed to Bosnian slugs: `/usluge`, `/o-nama`, `/kontakt`.
+- Local SEO: `lang="bs"`, `og:locale` `bs_BA`, geo meta tags,
+  `ProfessionalService`/`WebSite`/`Service`/`FAQPage`/`BreadcrumbList` JSON-LD,
+  city landing pages under `/izrada-web-stranica/[grad]`.
+- Contact form uses document-level submit delegation (survives SPA navigation).
+
+### Fixed
+
+- Colourless outlined buttons were invisible (text in background colour);
+  new `aw-btn-ghost` class points Bulma's button vars at the text colour.
+
 ### Added
 
 - Dark / light mode with a navbar toggle; preference persisted in

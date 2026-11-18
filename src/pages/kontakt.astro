@@ -1,0 +1,172 @@
+---
+import PageHero from '../components/PageHero.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { addressLine, site } from '../data/site';
+import { breadcrumbSchema } from '../utils/schema';
+import { telHref } from '../utils/phone';
+---
+
+<BaseLayout
+  title="Kontakt — besplatna ponuda za web stranicu"
+  description={`Zatražite besplatnu ponudu za izradu web stranice. ${site.name}, ${site.address.city} — telefon ${site.phone}, odgovor u roku od jednog radnog dana.`}
+  schema={breadcrumbSchema([['Kontakt', '/kontakt']])}
+>
+  <PageHero
+    eyebrow="Kontakt"
+    title="Počnimo razgovorom."
+    subtitle="Recite nam čime se bavite i šta vam treba. Javljamo se s besplatnom ponudom u roku od jednog radnog dana."
+    compact
+  />
+
+  <section class="section aw-section">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-5">
+          <h2 class="title is-4">Kontakt podaci</h2>
+          <address class="aw-contact-list aw-footer-address">
+            <div>
+              <p class="aw-contact-label mb-1">Adresa</p>
+              <p>{addressLine}</p>
+            </div>
+            <div>
+              <p class="aw-contact-label mb-1">E-mail</p>
+              <a href={`mailto:${site.email}`}>{site.email}</a>
+            </div>
+            <div>
+              <p class="aw-contact-label mb-1">Telefon / Viber</p>
+              <a href={telHref(site.phone)}>{site.phone}</a>
+            </div>
+            <div>
+              <p class="aw-contact-label mb-1">Radno vrijeme</p>
+              <p set:html={site.hours.display.join('<br />')} />
+            </div>
+          </address>
+
+          <div class="aw-notice mt-5">
+            Niste iz {site.address.cityGenitive}? Nema problema — s većinom klijenata
+            radimo online, a za veće projekte dolazimo i na sastanak.
+          </div>
+        </div>
+
+        <div class="column is-6 is-offset-1">
+          <h2 class="title is-4">Pošaljite upit</h2>
+
+          <form id="contact-form" data-email={site.email}>
+            <div class="field">
+              <label class="label" for="contact-name">Ime i prezime</label>
+              <div class="control">
+                <input
+                  class="input"
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  placeholder="Vaše ime"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="contact-business">Firma i grad</label>
+              <div class="control">
+                <input
+                  class="input"
+                  id="contact-business"
+                  name="business"
+                  type="text"
+                  placeholder="npr. Frizerski salon, Tuzla"
+                  autocomplete="organization"
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="contact-email">E-mail</label>
+              <div class="control">
+                <input
+                  class="input"
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  placeholder="vi@primjer.ba"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="contact-interest">Zanima me</label>
+              <div class="control">
+                <div class="select is-fullwidth">
+                  <select id="contact-interest" name="interest">
+                    <option>Nova web stranica</option>
+                    <option>Web shop</option>
+                    <option>Redizajn postojeće stranice</option>
+                    <option>Lokalni SEO i Google Business profil</option>
+                    <option>Održavanje i hosting</option>
+                    <option>Još nisam siguran/na</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="contact-message">Poruka</label>
+              <div class="control">
+                <textarea
+                  class="textarea"
+                  id="contact-message"
+                  name="message"
+                  placeholder="Ukratko opišite svoj posao i šta vam treba."
+                  rows="5"
+                  required></textarea>
+              </div>
+              <p class="help">Obično odgovaramo u roku od jednog radnog dana.</p>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                <button class="button is-primary" type="submit">Pošalji upit</button>
+              </div>
+            </div>
+
+            <p id="contact-form-status" class="aw-form-note" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // The site is fully static, so the form composes an email in the visitor's
+  // mail client instead of pretending to POST to a backend that does not exist.
+  // Document-level delegation: <ClientRouter /> re-creates the form on every
+  // client-side navigation, so a listener bound to the element would go stale.
+  document.addEventListener('submit', (event) => {
+    const form = event.target;
+    if (!(form instanceof HTMLFormElement) || form.id !== 'contact-form') return;
+    event.preventDefault();
+    const status = document.querySelector<HTMLElement>('#contact-form-status');
+
+    const data = new FormData(form);
+    const email = form.dataset.email ?? '';
+    const name = String(data.get('name') ?? '');
+    const business = String(data.get('business') ?? '');
+    const from = String(data.get('email') ?? '');
+    const interest = String(data.get('interest') ?? '');
+    const message = String(data.get('message') ?? '');
+
+    const subject = encodeURIComponent(`Upit sa web stranice: ${interest}`);
+    const signature = business ? `${name}, ${business}` : name;
+    const body = encodeURIComponent(`${message}\n\n— ${signature} (${from})`);
+
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+
+    if (status) {
+      status.textContent = 'Otvaramo vaš e-mail program…';
+    }
+  });
+</script>

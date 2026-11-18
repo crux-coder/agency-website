@@ -7,7 +7,7 @@ export async function GET(context: APIContext) {
   const posts = await getCollection('blog');
 
   return rss({
-    title: `${site.name} Blog`,
+    title: `${site.name} — Blog`,
     description: site.description,
     site: context.site ?? site.url,
     items: posts.map((post) => ({
@@ -16,5 +16,6 @@ export async function GET(context: APIContext) {
       pubDate: post.data.pubDate,
       link: `/blog/${post.id}/`,
     })),
+    customData: '<language>bs-BA</language>',
   });
 }

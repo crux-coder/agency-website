@@ -2,17 +2,20 @@
 import CtaBand from '../components/CtaBand.astro';
 import PageHero from '../components/PageHero.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
 import { team, values } from '../data/team';
+import { breadcrumbSchema } from '../utils/schema';
 ---
 
 <BaseLayout
-  title="About"
-  description="Meet the team behind the gym and the principles that guide how we coach."
+  title="O nama"
+  description={`${site.name} je web agencija iz ${site.address.cityGenitive} koja pravi web stranice za lokalne firme širom Bosne i Hercegovine.`}
+  schema={breadcrumbSchema([['O nama', '/o-nama']])}
 >
   <PageHero
-    eyebrow="About us"
-    title="Coaching over noise."
-    subtitle="We started in 2019 with one squat rack and a borrowed room. We have grown slowly, on purpose, and coaching quality still comes first."
+    eyebrow="O nama"
+    title="Mala agencija, veliki fokus."
+    subtitle="Radimo isključivo s lokalnim firmama — jer znamo koliko je važno da vas klijenti iz vašeg grada pronađu prije konkurencije."
     compact
   />
 
@@ -20,32 +23,32 @@ import { team, values } from '../data/team';
     <div class="container">
       <div class="columns is-vcentered">
         <div class="column is-7">
-          <h2 class="title is-2 mb-4">Why we exist</h2>
+          <h2 class="title is-2 mb-4">Zašto postojimo</h2>
           <div class="content">
             <p>
-              Most of us came to fitness after burning out on the version sold in
-              advertisements: perfect gym selfies, extreme challenges, and a lot of
-              quiet guilt when life got in the way.
+              Većina malih firmi u BiH i dalje živi od preporuka. To je odlično —
+              ali danas i ta preporuka završi na Googleu: klijent ukuca vaše ime
+              ili uslugu i grad, i odluči na osnovu onoga što vidi.
             </p>
             <p>
-              We wanted something more useful. A place where a thirty-minute session
-              counts, where a week of missed training is information rather than
-              failure, and where the programme is built around your actual schedule.
+              Velike agencije su skupe i spore, a „rođak koji zna praviti
+              sajtove” rijetko misli na Google. Mi smo između: profesionalna
+              stranica, jasna cijena u KM i jedna osoba s kojom stalno komunicirate.
             </p>
             <p>
-              Today we run group classes, one-to-one coaching, and recovery work.
-              Everything is designed to fit into an ordinary week — and to survive it.
+              Gradimo brze stranice, optimizovane za lokalne pretrage, i
+              ostajemo uz vas i nakon objave — za izmjene, savjete i rast.
             </p>
           </div>
         </div>
         <div class="column is-5">
           <div class="box aw-hero-box">
-            <p class="aw-eyebrow mb-3">The short version</p>
+            <p class="aw-eyebrow mb-3">Ukratko</p>
             <ul class="content">
-              <li>Founded in 2019</li>
-              <li>Classes capped at sixteen people</li>
-              <li>No contracts — monthly or drop-in</li>
-              <li>Concession places in every class</li>
+              <li>Sjedište u {site.address.cityLocative}, radimo u cijeloj BiH</li>
+              <li>Samo lokalne firme i mali biznisi</li>
+              <li>Fiksne cijene u KM, bez skrivenih troškova</li>
+              <li>Direktan kontakt — telefon, Viber, e-mail</li>
             </ul>
           </div>
         </div>
@@ -56,8 +59,8 @@ import { team, values } from '../data/team';
   <section class="section aw-section aw-section-alt">
     <div class="container">
       <div class="aw-section-head">
-        <p class="aw-eyebrow mb-2">What guides us</p>
-        <h2 class="title is-2">Our values</h2>
+        <p class="aw-eyebrow mb-2">Čime se vodimo</p>
+        <h2 class="title is-2">Naše vrijednosti</h2>
       </div>
 
       <div class="columns">
@@ -79,15 +82,14 @@ import { team, values } from '../data/team';
   <section class="section aw-section">
     <div class="container">
       <div class="aw-section-head">
-        <p class="aw-eyebrow mb-2">The team</p>
-        <h2 class="title is-2">Coaches on the floor every day</h2>
-        <p class="subtitle is-6">No faceless roster — these are the people you train with.</p>
+        <p class="aw-eyebrow mb-2">Ko stoji iza agencije</p>
+        <h2 class="title is-2">Radite direktno sa mnom</h2>
       </div>
 
-      <div class="columns">
+      <div class="columns is-centered">
         {
           team.map((member) => (
-            <div class="column is-3">
+            <div class="column is-5">
               <div class="box aw-card">
                 <div class="is-flex is-align-items-center mb-4">
                   <span class="aw-avatar mr-4" aria-hidden="true">{member.initials}</span>
@@ -106,8 +108,8 @@ import { team, values } from '../data/team';
   </section>
 
   <CtaBand
-    eyebrow="Come meet us"
-    title="The best way to decide is to visit."
-    text="Walk the floor, meet a coach, and ask every question you have. There is no pressure to sign up today."
+    eyebrow="Upoznajmo se"
+    title="Kafa, poziv ili Viber — kako vama odgovara."
+    text="Ispričajte nam o svom poslu. Reći ćemo vam iskreno šta vam treba, a šta ne."
   />
 </BaseLayout>

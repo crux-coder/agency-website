@@ -5,64 +5,52 @@ import PageHero from '../components/PageHero.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import TestimonialCard from '../components/TestimonialCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { services } from '../data/services';
-import { site } from '../data/site';
+import { cities } from '../data/cities';
+import { processSteps, services } from '../data/services';
+import { primaryCta, site } from '../data/site';
 import { testimonials } from '../data/testimonials';
-
-// Structured data: recognise the business as a local gym / health club.
-const healthClubSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'HealthClub',
-  name: site.name,
-  description: site.description,
-  url: site.url,
-  email: site.email,
-  telephone: site.phone,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '123 Example Street',
-    addressLocality: 'Example City',
-    addressRegion: 'EX',
-    addressCountry: 'US',
-  },
-  openingHours: ['Mo-Fr 05:30-23:00', 'Sa 08:00-20:00', 'Su 09:00-18:00'],
-};
+import { businessSchema, websiteSchema } from '../utils/schema';
 
 const featuredServices = services.slice(0, 3);
 
+// Commitments, not vanity metrics — adjust to what you actually guarantee.
 const stats = [
-  { value: '350+', label: 'Active members' },
-  { value: '15', label: 'Classes every day' },
-  { value: '8', label: 'Certified coaches' },
-  { value: '7', label: 'Days a week' },
+  { value: '2–3', label: 'Sedmice do objave' },
+  { value: '100%', label: 'Prilagođeno mobitelima' },
+  { value: '24h', label: 'Odgovor na upit' },
+  { value: '0 KM', label: 'Skrivenih troškova' },
 ];
 ---
 
-<BaseLayout title={site.name} description={site.description} schema={healthClubSchema}>
+<BaseLayout
+  title="Izrada web stranica za lokalne firme u BiH"
+  description={site.description}
+  schema={[businessSchema(), websiteSchema()]}
+>
   <PageHero
-    eyebrow="Strength · Conditioning · Recovery"
-    title="Train hard. Recover smart."
-    subtitle="A no-nonsense gym for people who want real coaching, honest programming, and a routine that fits a busy life."
+    eyebrow="Izrada web stranica · Lokalni SEO · Google"
+    title="Web stranice koje donose klijente."
+    subtitle="Pravimo brze, moderne web stranice za lokalne firme u Bosni i Hercegovini — i brinemo da vas klijenti iz vašeg grada pronađu na Googleu."
   >
     <div class="buttons mt-5">
-      <a class="button is-primary is-medium" href="/contact">Book a free class</a>
-      <a class="button is-medium is-outlined" href="/services">Explore services</a>
+      <a class="button is-primary is-medium" href={primaryCta.href}>Zatražite besplatnu ponudu</a>
+      <a class="button is-medium is-outlined aw-btn-ghost" href="/usluge">Usluge i cijene</a>
     </div>
 
     <Fragment slot="aside">
       <div class="box aw-hero-box">
-        <p class="aw-eyebrow mb-3">This week's classes</p>
+        <p class="aw-eyebrow mb-3">Za koga radimo</p>
         <ul class="content">
-          <li><strong>Mon · 07:00</strong> — Strength Circuit</li>
-          <li><strong>Wed · 18:00</strong> — HIIT &amp; Core</li>
-          <li><strong>Sat · 09:00</strong> — Mobility &amp; Recovery</li>
+          <li><strong>Zanatlije i majstori</strong> — vodoinstalateri, električari, auto servisi</li>
+          <li><strong>Ugostitelji</strong> — restorani, kafići, apartmani</li>
+          <li><strong>Saloni i ordinacije</strong> — frizeri, kozmetičari, stomatolozi</li>
         </ul>
-        <p class="aw-form-note mt-4">Drop-ins welcome while spaces last.</p>
+        <p class="aw-form-note mt-4">Stranica-vizitka već od 600 KM.</p>
       </div>
     </Fragment>
   </PageHero>
 
-  <section class="section aw-section" aria-label="Gym statistics">
+  <section class="section aw-section" aria-label="Naša obećanja">
     <div class="container">
       <div class="columns has-text-centered">
         {
@@ -80,10 +68,10 @@ const stats = [
   <section class="section aw-section aw-section-alt">
     <div class="container">
       <div class="aw-section-head">
-        <p class="aw-eyebrow mb-2">What we offer</p>
-        <h2 class="title is-2">Built around your goals</h2>
+        <p class="aw-eyebrow mb-2">Šta radimo</p>
+        <h2 class="title is-2">Izrada web stranica i lokalni SEO</h2>
         <p class="subtitle is-6">
-          Start with one service. Add more only if it genuinely helps you progress.
+          Sve što lokalnoj firmi treba da bude vidljiva online — na jednom mjestu.
         </p>
       </div>
 
@@ -98,35 +86,57 @@ const stats = [
       </div>
 
       <div class="has-text-centered mt-6">
-        <a class="button is-medium is-outlined" href="/services">See all services</a>
+        <a class="button is-medium is-outlined aw-btn-ghost" href="/usluge">Sve usluge i cijene</a>
       </div>
     </div>
   </section>
 
   <section class="section aw-section">
     <div class="container">
-      <div class="columns is-vcentered">
-        <div class="column is-7">
-          <p class="aw-quote mb-4">
-            “We are not here to shout at you. We are here to build you a body
-            that handles everything the rest of your week throws at it.”
-          </p>
-          <p class="has-text-weight-semibold">Mara Ellis, Founder</p>
-        </div>
-        <div class="column is-5 has-text-centered">
-          <a class="button is-primary is-medium" href="/contact">Talk to us first</a>
-          <p class="aw-form-note mt-3">A free session, zero pressure to join.</p>
-        </div>
+      <div class="aw-section-head">
+        <p class="aw-eyebrow mb-2">Kako radimo</p>
+        <h2 class="title is-2">Od razgovora do Googlea u četiri koraka</h2>
+      </div>
+
+      <div class="columns">
+        {
+          processSteps.map((step, index) => (
+            <div class="column is-3">
+              <div class="box aw-card">
+                <p class="aw-value-number mb-2">{String(index + 1).padStart(2, '0')}</p>
+                <h3 class="title is-5">{step.title}</h3>
+                <p>{step.description}</p>
+              </div>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
 
   <section class="section aw-section aw-section-alt">
     <div class="container">
+      <div class="columns is-vcentered">
+        <div class="column is-7">
+          <p class="aw-quote mb-4">
+            „Vaši klijenti vas već traže na Googleu. Pitanje je samo da li
+            pronađu vas — ili vašu konkurenciju.”
+          </p>
+          <p class="has-text-weight-semibold">{site.founder}, osnivač</p>
+        </div>
+        <div class="column is-5 has-text-centered">
+          <a class="button is-primary is-medium" href={primaryCta.href}>Razgovarajmo</a>
+          <p class="aw-form-note mt-3">Besplatna ponuda, bez obaveze.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section aw-section">
+    <div class="container">
       <div class="aw-section-head">
-        <p class="aw-eyebrow mb-2">Testimonials</p>
-        <h2 class="title is-2">What members say</h2>
-        <p class="subtitle is-6">Real people, real training — the best marketing is the floor itself.</p>
+        <p class="aw-eyebrow mb-2">Utisci klijenata</p>
+        <h2 class="title is-2">Šta kažu klijenti</h2>
       </div>
 
       <div class="columns">
@@ -141,13 +151,34 @@ const stats = [
     </div>
   </section>
 
+  <section class="section aw-section aw-section-alt">
+    <div class="container">
+      <div class="aw-section-head">
+        <p class="aw-eyebrow mb-2">Gdje radimo</p>
+        <h2 class="title is-2">Izrada web stranica širom BiH</h2>
+        <p class="subtitle is-6">
+          Sjedište nam je u {site.address.cityLocative},
+          a radimo s firmama iz cijele Bosne i Hercegovine.
+        </p>
+      </div>
+      <div class="aw-city-links">
+        {
+          cities.map((city) => (
+            <a class="button is-outlined aw-btn-ghost" href={`/izrada-web-stranica/${city.slug}/`}>
+              Izrada web stranica {city.name}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <LatestPosts />
 
   <CtaBand
-    eyebrow="Ready when you are"
-    title="Start with one free class."
-    text="Come try the floor, meet a coach, and see if the vibe fits. No contracts, no sales script."
-    ctaLabel="Claim your free class"
-    ctaHref="/contact"
+    eyebrow="Spremni kada ste vi"
+    title="Vaša nova web stranica za 2–3 sedmice."
+    text="Javite nam se i za jedan dan dobijete besplatnu ponudu u KM — bez obaveze i bez prodajnog pritiska."
+    ctaLabel="Zatražite besplatnu ponudu"
   />
 </BaseLayout>

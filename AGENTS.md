@@ -2,8 +2,8 @@
 
 ## Environment
 
-- **Node >= 22.22.0 required** (Astro 7 hard-fails below). Default shell PATH points at `~/.config/nvm/versions/node/v22.17.0` = too old — `pnpm build`/`pnpm check` abort with "not supported by Astro". Prefix correct version:
-  `export PATH="$HOME/.config/nvm/versions/node/v22.22.0/bin:$PATH"`
+- **Node >= 22.22.0 required** (Astro 7 hard-fails below). Default shell `node` (`/usr/local/bin`, v22.18) is too old — `pnpm build`/`pnpm check` abort with "not supported by Astro". Homebrew node is new enough; prefix it:
+  `export PATH="/opt/homebrew/bin:$PATH"`
   (`.nvmrc` wants 24.22.1; not installed).
 - **pnpm only** (`pnpm-lock.yaml` source of truth). Never npm/yarn.
 - `typescript` pinned **^6**: `astro check` errors on TS 7 (tsgo). Don't bump.
@@ -25,7 +25,8 @@
 - **Astro 7 + Bulma 1.0.4** (Sass `@use`), strict TypeScript, SPA navigation via `<ClientRouter />` (soft fade, respects `prefers-reduced-motion`). JS limited to navbar/theme scripts, written with **document-level event delegation** — DOM re-created on every client-side navigation; cached element refs go stale.
 - **Content-driven pages**: page text in `src/data/*.ts` (site, services, team, pricing, testimonials); components presentational with typed props; pages assemble. Keep.
 - **Blog**: Content Collections via Content Layer — schema `src/content.config.ts`, posts `src/content/blog/`. Import `z` from `astro/zod`, **not** `astro:content` (deprecated in Astro 7, removed in Astro 8; `astro check` warns). Content/type changes regenerate on `check`/`build`.
-- **Routes**: `/`, `/about`, `/services`, `/blog`, `/blog/[slug]`, `/contact`, `/rss.xml` (RSS endpoint), `404.astro` (custom 404).
+- **Routes** (Bosnian slugs): `/`, `/usluge`, `/o-nama`, `/kontakt`, `/blog`, `/blog/[slug]`, `/izrada-web-stranica/[grad]` (one local landing page per city in `src/data/cities.ts`), `/rss.xml`, `404.astro`.
+- **Language / local SEO**: all copy is Bosnian (ijekavica, `lang="bs"`, `og:locale` `bs_BA`, dates via `bs-BA`). JSON-LD helpers in `src/utils/schema.ts` (`ProfessionalService` + `WebSite` on home, `Service` + `FAQPage` on `/usluge`, `BreadcrumbList` everywhere). NAP (name/address/phone) lives only in `src/data/site.ts` — must match the Google Business profil. City pages need genuinely different intro copy (doorway-page risk).
 
 ## Styling (Bulma via Sass)
 

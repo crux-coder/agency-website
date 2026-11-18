@@ -1,3 +1,6 @@
+// PLACEHOLDERS: these are example testimonials so the layout has content.
+// Replace them with real quotes from real clients (with their permission)
+// before going live — or remove the section until you have some.
 export interface Testimonial {
   quote: string;
   name: string;
@@ -8,23 +11,23 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     quote:
-      'I joined for the classes and stayed for the coaching. Eighteen months in, I am stronger than I ever was in my twenties — and I actually look forward to training.',
-    name: 'Sam Rivera',
-    role: 'Member since 2025',
-    initials: 'SR',
+      'Primjer recenzije: od kada imamo novu stranicu, klijenti nas pronalaze na Googleu i zovu direktno sa stranice. Sve je završeno brzo i bez komplikacija.',
+    name: 'Ime klijenta',
+    role: 'Frizerski salon, Sarajevo',
+    initials: 'IK',
   },
   {
     quote:
-      'After two kids and a long break from the gym, I was terrified of walking into a weight room again. The coaches scaled everything and never made it feel like a big deal.',
-    name: 'Talia Bennett',
-    role: 'Member since 2024',
-    initials: 'TB',
+      'Primjer recenzije: konačno imamo stranicu koja radi na mobitelu. Jelovnik i rezervacije su na jednom mjestu, a gosti to primijete.',
+    name: 'Ime klijenta',
+    role: 'Restoran, Mostar',
+    initials: 'IK',
   },
   {
     quote:
-      'The recovery coaching changed more for me than any workout. I sleep better, my old back pain is gone, and I finally understand how to train without wrecking myself.',
-    name: 'Marcus Cole',
-    role: 'Member since 2026',
-    initials: 'MC',
+      'Primjer recenzije: dobili smo jasnu ponudu u KM, bez skrivenih troškova. Google Business profil je sređen i sada imamo više poziva.',
+    name: 'Ime klijenta',
+    role: 'Auto servis, Tuzla',
+    initials: 'IK',
   },
 ];

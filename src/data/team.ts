@@ -1,3 +1,5 @@
+import { site } from './site';
+
 export interface TeamMember {
   name: string;
   role: string;
@@ -5,30 +7,13 @@ export interface TeamMember {
   initials: string;
 }
 
+// Placeholder bio — rewrite it in your own words.
 export const team: TeamMember[] = [
   {
-    name: 'Mara Ellis',
-    role: 'Founder & Head Coach',
-    bio: 'Mara has coached strength training for twelve years and still believes the best programme is the one you actually show up for.',
-    initials: 'ME',
-  },
-  {
-    name: 'Jonah Reed',
-    role: 'Strength & Conditioning Coach',
-    bio: 'A former competitive powerlifter, Jonah builds programmes that make you stronger without making your joints pay for it.',
-    initials: 'JR',
-  },
-  {
-    name: 'Priya Nair',
-    role: 'Mobility & Recovery Coach',
-    bio: 'Priya specialises in the work most gyms skip: the warm-up, the cool-down, and the sleep. Your future self will thank her.',
-    initials: 'PN',
-  },
-  {
-    name: 'Diego Santos',
-    role: 'Nutrition Coach',
-    bio: 'Diego helps members fuel training and recover properly — with food they enjoy, not a spreadsheet of numbers.',
-    initials: 'DS',
+    name: site.founder,
+    role: 'Osnivač, web developer',
+    bio: 'Radim direktno s vama, od prvog razgovora do objave stranice. Bez posrednika, bez agencijskog žargona — samo stranica koja radi za vaš posao.',
+    initials: 'JM',
   },
 ];
 
@@ -39,18 +24,18 @@ export interface Value {
 
 export const values: Value[] = [
   {
-    title: 'Strong for life',
+    title: 'Rezultati, ne samo dizajn',
     description:
-      'We train for the body you take into your sixties, not a look for one summer. Every programme is built to last.',
+      'Lijepa stranica koju niko ne nađe ne vrijedi ništa. Svaka stranica se gradi da donese pozive, upite i nove klijente.',
   },
   {
-    title: 'Coaching, not barking',
+    title: 'Jasne cijene u KM',
     description:
-      'No yelling, no ego. Our coaches explain the why behind every set so you can train intelligently on your own.',
+      'Cijenu znate prije početka rada. Bez skrivenih troškova, bez iznenađenja na fakturi.',
   },
   {
-    title: 'Everyone belongs',
+    title: 'Lokalno i dostupno',
     description:
-      'Whatever your starting point, the floor is yours. We scale every class and meet you exactly where you are.',
+      'Razumijemo lokalno tržište i lokalne klijente. Dostupni smo na telefon, Viber i e-mail — na vašem jeziku.',
   },
 ];

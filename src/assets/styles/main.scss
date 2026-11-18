@@ -646,6 +646,58 @@ main {
   background-color: var(--aw-border);
 }
 
+.aw-footer-address {
+  font-style: normal;
+}
+
+/* --------------------------------- FAQ --------------------------------- */
+
+.aw-faq {
+  max-width: 48rem;
+  margin-inline: auto;
+
+  details {
+    border-bottom: 1px solid var(--aw-border);
+    padding: 1.1rem 0;
+  }
+
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--aw-text);
+    list-style-position: outside;
+
+    &:hover {
+      color: var(--aw-accent);
+    }
+  }
+
+  details p {
+    margin-top: 0.75rem;
+    color: var(--aw-muted);
+  }
+}
+
+/* ---------------------------- Ghost buttons ---------------------------- */
+
+// Bulma's colourless `.button.is-outlined` draws its text and border in the
+// page background colour (invisible). This only re-points Bulma's button
+// colour variables at the strong text colour, so it adapts to both themes.
+.aw-btn-ghost {
+  --bulma-button-h: var(--bulma-scheme-h);
+  --bulma-button-s: var(--bulma-scheme-s);
+  --bulma-button-l: var(--bulma-text-strong-l);
+}
+
+/* ------------------------------ City links ------------------------------ */
+
+.aw-city-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
 /* ------------------------- View transitions + motion ---------------------- */
 
 html {

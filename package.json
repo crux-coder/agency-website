@@ -1,8 +1,8 @@
 {
-  "name": "astro-wellness",
+  "name": "lokalni-web",
   "type": "module",
   "version": "0.0.1",
-  "description": "Modern dark/light gym template built with Astro and Bulma. Multi-page site with blog, services, pricing, testimonials, SEO and accessibility baked in.",
+  "description": "Web stranica agencije za izradu web stranica lokalnim firmama u BiH — na bosanskom, optimizovana za lokalni SEO.",
   "license": "MIT",
   "author": "Domenico Tenace",
   "keywords": [

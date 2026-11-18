@@ -1,0 +1,140 @@
+---
+import CtaBand from '../components/CtaBand.astro';
+import PageHero from '../components/PageHero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { faq } from '../data/faq';
+import { plans } from '../data/pricing';
+import { services } from '../data/services';
+import { primaryCta } from '../data/site';
+import { breadcrumbSchema, businessRef } from '../utils/schema';
+
+const toNumber = (price: string) => price.replace(/\./g, '');
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: 'Izrada web stranica',
+    provider: businessRef,
+    areaServed: { '@type': 'Country', name: 'Bosna i Hercegovina' },
+    offers: plans.map((plan) => ({
+      '@type': 'Offer',
+      name: plan.name,
+      description: plan.description,
+      price: toNumber(plan.price),
+      priceCurrency: 'BAM',
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  },
+  breadcrumbSchema([['Usluge', '/usluge']]),
+];
+---
+
+<BaseLayout
+  title="Usluge i cijene izrade web stranica"
+  description="Izrada web stranica, web shopova, lokalni SEO i Google Business profil za firme u BiH. Jasne cijene u KM — stranica-vizitka od 600 KM."
+  schema={schema}
+>
+  <PageHero
+    eyebrow="Usluge i cijene"
+    title="Sve za vašu firmu online."
+    subtitle="Od jednostavne stranice-vizitke do web shopa. Svaki paket uključuje prilagođavanje mobitelima i lokalni SEO, a cijenu znate unaprijed."
+    compact
+  />
+
+  <section class="section aw-section">
+    <div class="container">
+      <div class="aw-section-head">
+        <p class="aw-eyebrow mb-2">Šta radimo</p>
+        <h2 class="title is-2">Naše usluge</h2>
+      </div>
+
+      <div class="columns is-multiline">
+        {
+          services.map((service) => (
+            <div class="column is-4">
+              <ServiceCard {...service} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section aw-section aw-section-alt">
+    <div class="container">
+      <div class="aw-section-head">
+        <p class="aw-eyebrow mb-2">Cijene</p>
+        <h2 class="title is-2">Koliko košta izrada web stranice?</h2>
+        <p class="subtitle is-6">
+          Fiksne cijene u konvertibilnim markama. Bez skrivenih troškova i bez ugovora na neodređeno.
+        </p>
+      </div>
+
+      <div class="columns" style="--column-gap: 1.5rem">
+        {
+          plans.map((plan) => (
+            <div class="column is-4">
+              <div class:list={['box aw-card aw-plan', { 'is-highlighted': plan.highlighted }]}>
+                {plan.highlighted && <div class="aw-plan-badge">Najpopularnije</div>}
+                <h3 class="title is-4">{plan.name}</h3>
+                <p class="aw-price mb-2">
+                  {plan.price} KM <span>{plan.period}</span>
+                </p>
+                <p class="mb-4">{plan.description}</p>
+                <ul class="aw-check-list mb-4">
+                  {plan.features.map((feature) => <li>{feature}</li>)}
+                </ul>
+                <a
+                  class:list={['button is-fullwidth', plan.highlighted ? 'is-primary' : 'is-outlined aw-btn-ghost']}
+                  href={primaryCta.href}
+                >
+                  Izaberi paket {plan.name}
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="has-text-centered aw-form-note mt-5">
+        Održavanje i hosting nakon prve godine po dogovoru. Cijene su informativne — tačnu ponudu dobijete besplatno.
+      </p>
+    </div>
+  </section>
+
+  <section class="section aw-section">
+    <div class="container">
+      <div class="aw-section-head">
+        <p class="aw-eyebrow mb-2">Česta pitanja</p>
+        <h2 class="title is-2">Pitanja i odgovori</h2>
+      </div>
+
+      <div class="aw-faq">
+        {
+          faq.map((item) => (
+            <details>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow="Niste sigurni koji paket?"
+    title="Opišite nam svoj posao, mi predložimo rješenje."
+    text="Besplatan razgovor i ponuda u roku od jednog radnog dana. Bez obaveze."
+  />
+</BaseLayout>
